@@ -9,9 +9,11 @@ import CharacterImage from "./assets/images/character.png";
 import BGImage from "./assets/images/blob.svg";
 import SearchButton from './components/buttons/SearchButton';
 import FilterButton from './components/buttons/FilterButton';
+import Paragraph from './components/Paragraph';
 
 function App() {
   const [selectedType, setSelectedType] = useState(null);
+  const [filterClicked, setFilterClicked] = useState(false); 
   const [fetchActivity, setFetchActivity] = useState(false); 
   const urlToFetch = selectedType ? getActivityByTypeUrl(selectedType.toLowerCase()) : null;
   const { data: activities, loading, error } = useApi(fetchActivity ? CORS_ANYWHERE_URL + urlToFetch : null);
@@ -20,11 +22,13 @@ function App() {
 
   const handleFilterClick = (type) => {
     setSelectedType(type);
-    setFetchActivity(false); 
+    setFetchActivity(false);
+    setFilterClicked(true); 
   };
 
   const handleFetchActivity = () => {
     setFetchActivity(true); 
+    setFilterClicked(false);
   };
 
   useEffect(() => {
@@ -72,12 +76,17 @@ function App() {
         <section className='flex flex-col justify-center items-center my-[5rem] md:my-[0] md:w-[45%] md:h-[90%] md:mr-[10%]'>
           <h2 className='text-[1.8rem] font-bold w-[80%] text-center leading-[1em] mb-[2rem]'>Activity:</h2>
 
-          {loading ? (
-            <p className='w-[60%] text-center text-[1.2rem] font-bold'> Generating the activity...</p> 
+          {
+          !selectedType ? (
+            <Paragraph text = "Select the category..."/>
+          ) : filterClicked ? (
+            <Paragraph text = "Press Generate button!"/>
+          ) : loading ? (
+            <Paragraph text = "Generating the activity..."/>
           ) : error || !randomActivity ? (
-            <p className='w-[60%] text-center text-[1.2rem] font-bold'> No activity was found...</p>
+            <Paragraph text = "No activity was found..."/>
           ) : (
-              <p className='w-[60%] text-center text-[1.2rem] font-bold'> {randomActivity.activity} </p>
+            <Paragraph text = {randomActivity.activity}/>
           )}
         </section>
       </div>
