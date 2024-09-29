@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  --col-grey: #F5F5F6;
+  --col-darker-grey: #DADADA;
+  --col-violet: #5E539F;
+  --col-black: #1D1E1D;
+  --col-white: #FFFFFF;
+} 
+
+/* RESET */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* FONTS */
+
+@font-face {
+  font-family: 'Calibri';
+    src:  url('/src/assets/fonts/Calibri.ttf') format('truetype'),
+          url('/src/assets/fonts/calibrib.ttf') format('truetype'),
+          url('/src/assets/fonts/calibril.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Calibri', 'Arial', sans-serif;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+
+
+/*F5F5F6*/
