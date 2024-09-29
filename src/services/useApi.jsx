@@ -6,23 +6,28 @@ const useApi = (url) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const getData = async (url) => {
+        const fetchData = async (url) => {
             setLoading(true);
             setError(null);
             try {
+                console.log("Fetching URL:", url);
                 const response = await fetch(url);
                 if (!response.ok) {
                     throw new Error(`Error ${response.status}`);
                 }
                 const jsonData = await response.json();
                 setData(jsonData);
+                console.log("Activities fetched:", jsonData); 
             } catch (error) {
                 setError(error.message);
             } finally {
                 setLoading(false);
             }
         };
-        getData(url);
+        if (url) {
+            fetchData(url);
+        }
+        
     }, [url]);
 
     return { data, loading, error };

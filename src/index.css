@@ -11,6 +11,11 @@
   --col-white: #FFFFFF;
 } 
 
+#root {
+  height: 100vh; /* or use 100% to fill the parent */
+}
+
+
 /* RESET */
 
 * {
